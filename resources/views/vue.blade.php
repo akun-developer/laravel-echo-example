@@ -1,9 +1,11 @@
-<div class="title m-b-md">
-    @{{ count }}
-</div>
+<div class="content" id="app">
+    <div class="title m-b-md">
+        @{{ count }}
+    </div>
 
-<div class="links">
-    <a href="" v-for="user in users">@{{ user.email }}</a>
+    <div class="links">
+        <a href="" v-for="user in users">@{{ user.email }}</a>
+    </div>
 </div>
 
 @push('script')

@@ -79,9 +79,8 @@
                 </div>
             @endif
 
-            <div class="content" id="app">
-                @include('vue')
-            </div>
+            @include('vue')
+
         </div>
 
         <script src="{{ asset('js/socket.io.js') }}"></script>
