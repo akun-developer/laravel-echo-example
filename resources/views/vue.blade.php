@@ -9,10 +9,11 @@
 </div>
 
 @push('script')
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="{{ asset('js/vue/vue.js') }}"></script>
     <script>
         var app = new Vue({
             el: '#app',
+            mode: 'production',
             data: {
                 count: '',
                 users: [],
