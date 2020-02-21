@@ -14,14 +14,16 @@ class UserEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $user;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($model)
     {
-        //
+        $this->user = $model;
     }
 
     /**
@@ -50,7 +52,8 @@ class UserEvent implements ShouldBroadcast
       */
      public function broadcastWith() {
          return [
-             'refresh' => true
+             'refresh' => true,
+             'user' => $this->user
          ];
      }
 }

@@ -40,6 +40,6 @@ class User extends Authenticatable
 
     protected static function boot() {
       parent::boot();
-      static::observe(UserObserver::class);
+      self::observe(UserObserver::class);
     }
 }

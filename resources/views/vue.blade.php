@@ -31,6 +31,7 @@
                 },
                 socket() {
                   let self = this;
+                  // name of channel include {app_name_database_channel_name}
                   Echo.channel('realtime_database_User')
                   .listen('.refresh.users', function (json) {
                     if(json.refresh) {

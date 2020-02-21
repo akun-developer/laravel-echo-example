@@ -6,7 +6,7 @@ use App\Events\UserEvent;
 
 class UserObserver
 {
-    public function created(){
-      event(new UserEvent());
+    public function created($user){
+      event(new UserEvent($user));
     }
 }
