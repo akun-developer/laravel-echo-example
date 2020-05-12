@@ -44,7 +44,7 @@ class CsvCommand extends Command
             $name = 'feed';
             $data = [];
             $zipPassword = '';
-            
+
             // download all zip
             $baseUrl = 'https://icubic.xyz/ic-download/blibli';
             $numDownload = 1;
@@ -57,19 +57,23 @@ class CsvCommand extends Command
             }
 
             // extract all zip
-            $numZip = 1;
-            while (file_exists($folderDownloaded.'/'.$name.'-'.$numZip.'.zip')) {
-                $zipLocation = $folderDownloaded.'/'.$name.'-'.$numZip.'.zip';
-                $extractTo = $this->extractZip($zipLocation, $folderCsv, $zipPassword);
-                $numZip++;
+            $allZip = \File::files($folderDownloaded);
+            foreach ($allZip as $zip) {
+                $zipInfo = pathinfo($zip);
+                if (isset($zipInfo['extension']) && $zipInfo['extension'] == 'zip') {
+                    $fileZip = $folderDownloaded.'/'.$zipInfo['basename'];
+                    $extractTo = $this->extractZip($fileZip, $folderCsv, $zipPassword);
+                }
             }
 
             // maping csv
-            $numCsv = 1;
-            while (file_exists($folderCsv.'/'.'product-output-'.$numCsv.'.csv')) {
-                $csv = $folderCsv.'/'.'product-output-'.$numCsv.'.csv';
-                $data = array_merge($data, $this->readCsv($csv));
-                $numCsv++;
+            $allCsv = \File::files($folderCsv);
+            foreach ($allCsv as $csv) {
+                $csvInfo = pathinfo($csv);
+                if (isset($csvInfo['extension']) && $csvInfo['extension'] == 'csv') {
+                    $fileCsv = $folderCsv.'/'.$csvInfo['basename'];
+                    $data = array_merge($data, $this->readCsv($fileCsv));
+                }
             }
 
             dd($data);
